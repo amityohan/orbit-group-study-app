@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0A0B14;
+  --foreground: #F1F5F9;
+  --accent-from: #7C5CFF;
+  --accent-to: #22D3EE;
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-hover: rgba(255, 255, 255, 0.08);
+}
+
+/* Custom theme colors for live customizable accent */
+[data-theme-accent="amber-rose"] {
+  --accent-from: #F59E0B;
+  --accent-to: #FB7185;
+}
+[data-theme-accent="emerald-cyan"] {
+  --accent-from: #10B981;
+  --accent-to: #06B6D4;
+}
+[data-theme-accent="violet-cyan"] {
+  --accent-from: #7C5CFF;
+  --accent-to: #22D3EE;
+}
+[data-theme-accent="fuchsia-indigo"] {
+  --accent-from: #D946EF;
+  --accent-to: #6366F1;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  selection-background-color: #7C5CFF;
+  selection-color: #FFFFFF;
+}
+
+::selection {
+  background: rgba(124, 92, 255, 0.4);
+  color: #FFFFFF;
+}
+
+/* Typography Helpers */
+.font-heading {
+  font-family: var(--font-space), sans-serif;
+}
+
+.font-mono-numbers {
+  font-family: var(--font-jetbrains), monospace;
+}
+
+/* Deep Space Glassmorphism */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+}
+
+.glass-panel-interactive {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-interactive:hover {
+  background: var(--glass-hover);
+  border-color: rgba(124, 92, 255, 0.35);
+  box-shadow: 0 0 25px -5px rgba(124, 92, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+}
+
+.gradient-border-glow {
+  position: relative;
+}
+.gradient-border-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.4;
+  filter: blur(4px);
+  transition: opacity 0.3s ease;
+}
+.gradient-border-glow:hover::before {
+  opacity: 0.8;
+}
+
+/* Custom Thin Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0B14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 92, 255, 0.5);
+}
+
+/* Starfield / Orbit Animations */
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 0.9; transform: scale(1.2); }
+}
+
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-orbit {
+  animation: orbit-spin 40s linear infinite;
+}
+
+.animate-orbit-reverse {
+  animation: orbit-spin 60s linear infinite reverse;
+}
+
+.animate-float {
+  animation: float-gentle 6s ease-in-out infinite;
+}
+
+/* 3D card perspective for flashcard flip */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
